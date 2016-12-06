@@ -41,5 +41,11 @@ class ADFBasePage < Calabash::ABase
   def load_button(buttonname)
     return Button.new(buttonname)
   end
+  
+  def am_i_here(elements)
+    elements.each do |element|
+      element.exists?
+    end
+  end
 
 end

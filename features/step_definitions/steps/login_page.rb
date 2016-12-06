@@ -16,6 +16,7 @@ And(/^I am on the Login Page$/) do
   @current_page = page(LoginPage).await(timeout: 30)
   @test_var     = page(LoginPage).await(timeout:30)
 
+  @app.test_login_page_screen.username_text.exists?
 end
 
 Then(/^I should see the login message "([^"]*)"$/) do |arg|
@@ -31,11 +32,6 @@ When(/^I type valid login credentials$/) do
   #@current_page.enter_creds(creds[:username], creds[:password])
   @app.test_login_page_screen.username_text.hulu_type_field(creds[:username])
   @app.test_login_page_screen.password_text.hulu_type_field(creds[:password])
-end
-
-When(/^I type valid login credentials1$/) do
-  creds = CREDS[:valid]
-  #@test_var.enter_creds(creds[:username], creds[:password])
 end
 
 And(/^I should see the logout button with text "([^"]*)"$/) do |arg|
@@ -60,4 +56,16 @@ end
 
 Then(/^I should see the login fields$/) do
   @current_page.check_if_login_fields_exists
+end
+
+Given /^I press the login button$/ do
+  @app.test_login_page_screen.login_button.hulutouch
+end
+
+When(/^I press the logout button$/) do
+  @app.test_login_page_screen.logout_button.hulutouch
+end
+
+When(/^I press the try again button$/) do
+  @app.test_login_page_screen.tryagain_button.hulutouch
 end

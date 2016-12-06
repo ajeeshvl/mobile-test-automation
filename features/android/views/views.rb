@@ -7,13 +7,20 @@ class Views
     @element_type = ""
   end
 
-  def hulutouch
-    tap_when_element_exists @identifier
+  def hulutouch(dynamicidentifier=nil)
+    if(dynamicidentifier.nil?)
+      uiquery = query_view(getviews,@identifier)
+    else
+      uiquery = query_view(getviews,dynamicidentifier)
+    end
+    tap_when_element_exists uiquery
   end
 
-  def hulutouch(dynamicidentifier)
-    uiquery = query_view(getviews,dynamicidentifier)
-    tap_when_element_exists uiquery
+  def exists?()
+     uiquery = query_view(getviews,@identifier)
+     if(uiquery.nil?)
+       screenshot_and_raise "There is no object found for element type: "+element_type+ " element: "+@identifier+" Views: "+getviews
+     end
   end
 
   def query_view(views, mark_id)
