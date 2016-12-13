@@ -1,4 +1,4 @@
-@smoke
+@mytest
 Feature: Login Page
   As a Device Farm user
   I would like to be able to see examples of testing a login page
